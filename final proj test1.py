@@ -1,13 +1,9 @@
 import turtle
 import random
 
-
-
 #Initialize lists
 pos_list = []
 stamp_list = []
-food_stamps = []
-food_pos = []
 
 #turtle.bgpic('jungle(1).gif')
 SIZE_X=1100
@@ -15,11 +11,9 @@ SIZE_Y=1100
 turtle.setup(SIZE_X, SIZE_Y)
 maze = turtle.clone()
 
-
 turtle.hideturtle()
 maze.pensize(25)
 maze.speed(300)
-
 
 def new_stamp():
     maze_pos = maze.pos()
@@ -105,64 +99,34 @@ def drawmaze():
     move(-400,300)
 
 drawmaze()
-turtle.showturtle()
 
-def make_food():
-    min_x=-int(1000/2/50)+1
-    max_x=int(1000/2/50)-1
-    min_y=-int(1000/2/50)+1
-    max_y=int(1000/2/50)-1
+turtle.tracer(1,0)
 
-    food_x = random.randint(min_x,max_x)*50
-    food_y = random.randint(min_y,max_y)*50
-    food.goto(food_x,food_y)
-    food_pos.append(food.pos())
-    food_stamps.append(food.stamp())
-
-
-
-
-
-scar = turtle.clone()
-turtle.register_shape("hunter.gif")
-scar.shape("hunter.gif")
-
-for this_food_pos in food_pos:
-    food.goto(this_food_pos)
-    food_stamp = food.stamp()
-    food_stamps.append(food_stamp)
-
-food = turtle.Turtle()
-turtle.hideturtle()
-food.penup()
-turtle.register_shape('chicken.gif')
-food.shape('chicken.gif')
-turtle.showturtle()
-
-
-turtle.tracer
-turtle.penup()
 #makes the turtle move more smoothly.
-simba = turtle.clone()
+simba = turtle.Turtle()
+turtle.hideturtle()
+simba.penup()
+simba.goto(450,-450)
 
+
+
+scar = turtle.Turtle()
+#scar.goto(100,100)
+#print('fhevhecbjdwe')
+#scar.shape('square')
+turtle.hideturtle()
+scar.penup()
 
 turtle.register_shape("simba.gif")
 simba.shape("simba.gif")
-turtle.hideturtle()
-simba.goto(400,-350)
 simba.direction = 'Up'
-
-
-
-
-#that will make simba move using the arrows:
 def move_simba():
     my_pos = simba.pos()
     x_pos = my_pos[0]
     y_pos = my_pos[1]
 
 #if you press the up arrow simba will move forward
-    if simba.direction == 'Up' :   
+    if simba.direction == 'Up' :
         simba.goto(x_pos , y_pos +50)
         print('you moved up')
 
@@ -178,86 +142,82 @@ def move_simba():
     elif simba.direction == 'Left' :
         simba.goto(x_pos - 50,y_pos)
         print('you moved left')
-        
+
     if simba.pos() in food_pos:
         food_index=food_pos.index(simba.pos())
         food.clearstamp(food_stamps[food_index])
         food_pos.pop(food_index)
         food_stamps.pop(food_index)
         print("You have eaten the food!")
-    
-    #if len(food_stamps) <= 1:
-    #make_food()
-    
+
+    if len(food_stamps) <= 1:
+        make_food()
+
 def up():
     simba.direction = 'Up'
     print('you pressed the up key!')
     move_simba()
-turtle.onkeypress(up, 'Up')
+    turtle.onkeypress(up, 'Up')
 
 def down():
     simba.direction = 'Down'
     print('you pressed the down key!')
     move_simba()
-turtle.onkeypress(down, 'Down')
+    turtle.onkeypress(down, 'Down')
 
 def right():
     simba.direction = 'Right'
     move_simba()
-turtle.onkeypress(right,'Right')
+    turtle.onkeypress(right,'Right')
 
 def left() :
     simba.direction = 'Left'
     move_simba()
-turtle.onkeypress(left,'Left')
-
+    turtle.onkeypress(left,'Left')
 
 
 turtle.listen()
 
-for this_food_pos in food_pos:
+
+turtle.register_shape("hunter.gif")
+scar.shape("hunter.gif")
+scar.goto(-400,450)
+
+
+scar_pos = scar.pos()
+
+
+food = turtle.Turtle()
+turtle.hideturtle()
+food.penup()
+turtle.register_shape('chicken.gif')
+food.shape('chicken.gif')
+
+food_stamps = []
+food_pos = []
+for this_food_pos in food_pos :
     food.goto(this_food_pos)
     food_stamp = food.stamp()
     food_stamps.append(food_stamp)
 
 
+def make_food():
+    min_x=-int(1000/2/50)+1
+    max_x=int(1000/2/50)-1
+    min_y=-int(1000/2/50)+1
+    max_y=int(1000/2/50)-1
 
-
-
-
-
-
-simba.speed(-2)        
-
-        
-
-my_pos=simba.pos()
-scar_pos=scar.pos()
-
-x_pos1=scar.pos()[0]
-y_Pos1=scar.pos()[1]
-
-while 1==1:
-    scar.penup()
-    scar.speed(3)
-    scar.goto((random.randint(-500,500)),(random.randint(-500,500)))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    food_x = random.randint(min_x,max_x)*50
+    food_y = random.randint(min_y,max_y)*50
+    food.goto(food_x,food_y)
+    food_pos.append(food.pos())
+    food_stamps.append(food.stamp())
+   
+#that will make simba move using the arrows:
 
 move_simba()
 
-turtle.mainloop()
 
+
+
+turtle.mainloop()
