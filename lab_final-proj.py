@@ -1,6 +1,10 @@
 import turtle
 import random
+from pygame import mixer # Load the required library
 
+mixer.init()
+mixer.music.load('hakouna')
+mixer.music.play()
 
 
 #Initialize lists
@@ -11,6 +15,7 @@ food_pos = []
 
 turtle.bgpic('rocki.gif')
 SIZE_X=1100
+
 SIZE_Y=1100
 turtle.setup(SIZE_X, SIZE_Y)
 maze = turtle.clone()
@@ -108,8 +113,8 @@ def drawmaze():
 drawmaze()
 turtle.showturtle()
 food = turtle.clone()
-turtle.register_shape('chicken.gif')
-food.shape('chicken.gif')
+turtle.register_shape('chicken1.gif')
+food.shape('chicken1.gif')
 
 turtle.hideturtle()
 food.penup()
@@ -148,9 +153,10 @@ def make_food():
 
 
 
+
 scar = turtle.clone()
-turtle.register_shape("hunter.gif")
-scar.shape("hunter.gif")
+turtle.register_shape("hunter1.gif")
+scar.shape("hunter1.gif")
 
 
 
@@ -210,18 +216,19 @@ def move_simba():
         food_pos.pop(food_index)
         food_stamps.pop(food_index)
         print("You have eaten the food!")
-        score=score+1
         turtle.undo()
+        score=score+1
         turtle.penup()
+        turtle.color('red')
         turtle.hideturtle()
-        turtle.goto(-398,200)
+        turtle.goto(-470,450)
         turtle.pendown()
-        turtle.write(score, False,align="left", font=("arial",20,"normal"))
+        turtle.write('score : ' +str(score), False,align="left", font=("Arial",20,"normal"))
 
 
         
 #this one
-    if len(food_stamps) <= 1:
+    if len(food_stamps) < 1:
         make_food()
     
     
@@ -265,12 +272,6 @@ while 1==1:
     scar.penup()
     scar.speed(5)
     scar.goto((random.randint(-500,500)),(random.randint(-500,500)))
-
-
-
-
-
-
 
 
 
